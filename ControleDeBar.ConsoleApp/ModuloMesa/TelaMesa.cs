@@ -9,6 +9,7 @@ namespace ControleDeBar.ConsoleApp.ModuloMesa
         {
             this.repositorioBase = repositorioMesa;
             nomeEntidade = "Mesa";
+            sufixo = "s";
         }
 
         protected override void MostrarTabela(ArrayList registros)

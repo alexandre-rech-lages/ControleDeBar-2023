@@ -6,7 +6,7 @@
         {
             Console.Clear();
 
-            Console.WriteLine("Controle de Bar do Seu João Prova\n");
+            Console.WriteLine("Controle de Bar\n");
 
             Console.WriteLine("Digite 1 para Cadastrar Mesa");
             Console.WriteLine("Digite 2 para Cadastrar Produtos");

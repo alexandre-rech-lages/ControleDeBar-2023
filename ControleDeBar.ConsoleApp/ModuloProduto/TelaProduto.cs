@@ -9,6 +9,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
         {
             this.repositorioBase = repositorioProduto;
             nomeEntidade = "Produto";
+            sufixo = "s";
         }
 
         protected override void MostrarTabela(ArrayList registros)

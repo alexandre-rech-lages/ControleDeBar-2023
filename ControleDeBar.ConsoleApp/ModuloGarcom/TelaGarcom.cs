@@ -9,6 +9,7 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcom
         {
             this.repositorioBase = repositorioGarcom;
             nomeEntidade = "Garçom";
+            sufixo = "s";
         }
 
         protected override void MostrarTabela(ArrayList registros)

@@ -15,8 +15,7 @@ namespace ControleDeBar.ConsoleApp
            
             TelaMesa telaMesa = new TelaMesa(repositorioMesa);
             TelaProduto telaProduto = new TelaProduto(repoositorioProduto);
-            TelaGarcom telaGarcom = new TelaGarcom(repositorioGarcom);
-            
+            TelaGarcom telaGarcom = new TelaGarcom(repositorioGarcom);            
 
             TelaPrincipal principal = new TelaPrincipal();
 
@@ -48,7 +47,6 @@ namespace ControleDeBar.ConsoleApp
                     {
                         telaMesa.ExcluirRegistro();
                     }
-                    continue;
                 }
 
                 if (opcao == "2")
@@ -94,10 +92,7 @@ namespace ControleDeBar.ConsoleApp
                     {
                         telaGarcom.ExcluirRegistro();
                     }
-                }
-
-               
-
+                }               
             }
         }
     }
