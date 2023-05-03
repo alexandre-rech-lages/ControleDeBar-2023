@@ -36,9 +36,9 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             Console.WriteLine("Digite 1 para Abrir Nova Conta");
             Console.WriteLine("Digite 2 para Registrar Pedidos");
-
             Console.WriteLine("Digite 3 para Fechar Conta");
             Console.WriteLine("Digite 4 para Visualizar Contas Abertas");
+
             Console.WriteLine("Digite 5 para Visualizar Faturamento do Dia");
 
             Console.WriteLine("Digite s para Sair");
@@ -70,6 +70,8 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
         public bool VisualizarContasAbertas()
         {
+            MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Visualizando contas em aberto...");
+
             ArrayList contasEmAberto = repositorioConta.SelecionarContasEmAberto();
 
             if (contasEmAberto.Count == 0)
@@ -85,6 +87,8 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
       
         public void RegistrarPedidos()
         {
+            MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Registrando pedidos...");
+
             bool temContasEmAberto = VisualizarContasAbertas();
 
             if (temContasEmAberto == false)
@@ -104,22 +108,58 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
                 RemoverPedidos(contaSelecionada);
         }
 
+        public void FecharConta()
+        {
+            MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Fechando contas...");
+
+            bool temContasEmAberto = VisualizarContasAbertas();
+
+            if (temContasEmAberto == false)
+                return;
+
+            Conta contaSelecionada = (Conta)EncontrarRegistro("Digite o id da Conta: ");
+
+            contaSelecionada.Fechar();
+
+            MostrarMensagem("Conta fechada com sucesso", ConsoleColor.Green);
+        }
+
+        public void VisualizarFaturamentoDoDia()
+        {
+            MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Visualizando faturamento do dia...");
+
+            Console.WriteLine( "Digite a data: " );
+            DateTime data = Convert.ToDateTime(Console.ReadLine());
+
+            ArrayList contasFechadasNoDia = repositorioConta.SelecionarContasFechadas(data);
+
+            FaturamentoDiario faturamentoDiario = new FaturamentoDiario(contasFechadasNoDia);
+
+            decimal totalFaturado = faturamentoDiario.CalcularTotal();
+
+            Console.WriteLine( "Contas fechadas na data: " + data.ToShortDateString() );
+
+            MostrarTabela(contasFechadasNoDia);
+
+            Console.WriteLine(  );
+
+            MostrarMensagem("Total faturado: " + totalFaturado, ConsoleColor.Green);
+        }
+
         #region métodos privados
 
         protected override void MostrarTabela(ArrayList registros)
         {
             foreach (Conta conta in registros)
             {
-                Console.Write("Conta: " + conta.id + ", Mesa: " + conta.mesa.numero + ", Garçom: " + conta.garcom.nome);
-
+                Console.WriteLine("Conta: " + conta.id + ", Mesa: " + conta.mesa.numero + ", Garçom: " + conta.garcom.nome);
+                Console.WriteLine();
                 foreach (Pedido pedido in conta.pedidos)
-                {
-                    Console.WriteLine();
-                    Console.Write("Produto: " + pedido.produto.nome + ", Qtd: " + pedido.quantidadeSolicitada);
-                    Console.WriteLine();
+                {                    
+                    Console.WriteLine("\tProduto: " + pedido.produto.nome + ", Qtd: " + pedido.quantidadeSolicitada);                 
                 }
 
-                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("------------------------------------------------------\n");
             }
         }
 
@@ -129,7 +169,11 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             Garcom garcomSelecionado = ObterGarcom();
 
-            return new Conta(mesaSelecionada, garcomSelecionado);
+            Console.Write( "Digite a data: " );
+
+            DateTime dataAbertura = Convert.ToDateTime(Console.ReadLine());
+
+            return new Conta(mesaSelecionada, garcomSelecionado, dataAbertura);
         }
 
 
@@ -137,7 +181,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             Console.WriteLine("Selecionar produtos? [s] ou [n]");
 
-            Console.WriteLine(" -> ");
+            Console.Write(" -> ");
 
             string opcao = Console.ReadLine();
 
@@ -152,7 +196,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
                 Console.WriteLine("Selecionar mais produtos? [s] ou [n]");
 
-                Console.WriteLine(" -> ");
+                Console.Write(" -> ");
 
                 opcao = Console.ReadLine();
             }
@@ -202,6 +246,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             return mesaSelecionada;
         }
 
-        #endregion 
+
+        #endregion
     }
 }

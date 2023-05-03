@@ -13,11 +13,14 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         public Garcom garcom;
         public bool estaAberta;
 
-        public Conta(Mesa m, Garcom g)
+        public DateTime data;
+
+        public Conta(Mesa m, Garcom g, DateTime dataAbertura)
         {
             mesa = m;
             garcom = g;            
             pedidos = new ArrayList();
+            data = dataAbertura;
 
             Abrir();
         }       

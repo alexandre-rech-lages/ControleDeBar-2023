@@ -22,5 +22,18 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             return contasEmAberto;
         }
+
+        public ArrayList SelecionarContasFechadas(DateTime data)
+        {
+            ArrayList contasEmAberto = new ArrayList();
+
+            foreach (Conta conta in listaRegistros)
+            {
+                if (conta.estaAberta == false && conta.data.Date == data.Date)
+                    contasEmAberto.Add(conta);
+            }
+
+            return contasEmAberto;
+        }
     }
 }
