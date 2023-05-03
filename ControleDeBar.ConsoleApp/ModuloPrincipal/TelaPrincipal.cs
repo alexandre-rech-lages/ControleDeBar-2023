@@ -63,6 +63,7 @@ namespace ControleDeBar.ConsoleApp.ModuloPrincipal
             
             else if (opcao == "4")
                 return telaConta;
+
             else
                 return null;
         }

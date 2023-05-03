@@ -75,22 +75,18 @@ namespace ControleDeBar.ConsoleApp
 
                 if (tela == null)
                     break;
-
-                string subMenu = tela.ApresentarMenu();
-
-                if (tela is TelaConta)
-                {
-                    CadastrarContas(tela, subMenu);
-
-                    continue;
-                }
-
-                ExecutarCadastros(tela, subMenu);
+                
+                if (tela is TelaConta)                
+                    CadastrarContas(tela);                                    
+                else  
+                    ExecutarCadastros(tela);
             }
         }
 
-        private static void ExecutarCadastros(TelaBase tela, string subMenu)
+        private static void ExecutarCadastros(TelaBase tela)
         {
+            string subMenu = tela.ApresentarMenu();
+
             if (subMenu == "1")
             {
                 tela.InserirNovoRegistro();
@@ -110,8 +106,10 @@ namespace ControleDeBar.ConsoleApp
             }
         }
 
-        private static void CadastrarContas(TelaBase tela, string subMenu)
+        private static void CadastrarContas(TelaBase tela)
         {
+            string subMenu = tela.ApresentarMenu();
+
             TelaConta telaConta = (TelaConta)tela;
 
             if (subMenu == "1")
