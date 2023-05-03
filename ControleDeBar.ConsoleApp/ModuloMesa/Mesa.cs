@@ -6,7 +6,7 @@ namespace ControleDeBar.ConsoleApp.ModuloMesa
     public class Mesa : EntidadeBase
     {
         public string numero;
-        private bool ocupada;
+        public bool ocupada;
 
         public Mesa(string numeroMesa)
         {
@@ -31,12 +31,12 @@ namespace ControleDeBar.ConsoleApp.ModuloMesa
             return erros;
         }
 
-        internal void Desocupar()
+        public void Desocupar()
         {
             ocupada = false;
         }
 
-        internal void Ocupar()
+        public void Ocupar()
         {
             ocupada = true;
         }

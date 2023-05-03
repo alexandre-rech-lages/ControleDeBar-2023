@@ -16,8 +16,8 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcom
         {
             foreach (Garcom garcom in registros)
             {
-                Console.WriteLine(garcom.id);
-                Console.WriteLine(garcom.nome);
+                Console.Write(garcom.id + ", " + garcom.nome);
+                Console.WriteLine();
             }
         }
 

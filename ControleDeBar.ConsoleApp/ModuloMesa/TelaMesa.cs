@@ -1,4 +1,5 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
+using ControleDeBar.ConsoleApp.ModuloGarcom;
 using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloMesa
@@ -16,7 +17,9 @@ namespace ControleDeBar.ConsoleApp.ModuloMesa
         {
             foreach (Mesa mesa in registros)
             {
-                Console.WriteLine(mesa.numero);
+                string ocupada = mesa.ocupada ? "Ocupada" : "Desocupada";
+                Console.Write(mesa.id + ", " + mesa.numero + ", "+ ocupada);
+                Console.WriteLine();
             }
         }
 

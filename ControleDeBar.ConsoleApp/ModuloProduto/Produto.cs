@@ -5,7 +5,6 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
 {
     public class Produto : EntidadeBase
     {
-
         public string nome;
         public decimal preco;
 

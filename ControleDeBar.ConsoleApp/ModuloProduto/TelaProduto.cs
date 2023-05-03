@@ -16,9 +16,8 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
         {
             foreach (Produto produto in registros)
             {
-                Console.WriteLine(produto.id);
-                Console.WriteLine(produto.nome);
-                Console.WriteLine(produto.preco);
+                Console.Write(produto.id + ", " + produto.nome + ", " + produto.preco);
+                Console.WriteLine();
             }
         }
 
