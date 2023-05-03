@@ -1,5 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.ModuloConta;
-using ControleDeBar.ConsoleApp.ModuloGarcom;
+﻿using ControleDeBar.ConsoleApp.ModuloGarcom;
 using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloProduto;
 using System.Collections;
@@ -13,13 +12,11 @@ namespace ControleDeBar.ConsoleApp
             RepositorioMesa repositorioMesa = new RepositorioMesa(new ArrayList());
             RepositorioProduto repoositorioProduto = new RepositorioProduto(new ArrayList());
             RepositorioGarcom repositorioGarcom = new RepositorioGarcom(new ArrayList());
-            RepositorioConta repositorioConta = new RepositorioConta(new ArrayList());
-
+           
             TelaMesa telaMesa = new TelaMesa(repositorioMesa);
             TelaProduto telaProduto = new TelaProduto(repoositorioProduto);
             TelaGarcom telaGarcom = new TelaGarcom(repositorioGarcom);
-            TelaConta telaConta = new TelaConta(repositorioConta, telaGarcom, telaProduto, telaMesa);
-
+            
 
             TelaPrincipal principal = new TelaPrincipal();
 
@@ -99,34 +96,7 @@ namespace ControleDeBar.ConsoleApp
                     }
                 }
 
-                if (opcao == "4")
-                {
-                    string subMenu = telaConta.ApresentarMenu();
-
-                    if (subMenu == "1")
-                    {
-                        telaConta.InserirNovoRegistro();
-                    }
-                    else if (subMenu == "2")
-                    {
-                        telaConta.RegistrarPedidos();
-                        Console.ReadLine();
-                    }                    
-                    else if (subMenu == "3")
-                    {
-                        telaConta.FecharConta();
-                    }
-                    else if (subMenu == "4")
-                    {
-                        telaConta.VisualizarContasEmAberto();
-                        Console.ReadLine();
-                    }
-                    else if (subMenu == "5")
-                    {
-                        telaConta.VisualizarFaturamento();
-                        Console.ReadLine();
-                    }
-                }
+               
 
             }
         }
