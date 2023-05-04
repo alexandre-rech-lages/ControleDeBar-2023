@@ -36,12 +36,52 @@ namespace ControleDeBar.ConsoleApp
             laranjaSelecionada.tipoLaranja = TipoLaranja.Umbigo;
 
             Limao limaoSelecionado = caixaDeLimaoo.PegarUmaFrutaAleatoria();
+             
+            ConsoleColor corTeste = Teste();
 
-
+            switch (corTeste)
+            {
+                case ConsoleColor.Black:
+                    break;
+                case ConsoleColor.DarkBlue:
+                    break;
+                case ConsoleColor.DarkGreen:
+                    break;
+                case ConsoleColor.DarkCyan:
+                    break;
+                case ConsoleColor.DarkRed:
+                    break;
+                case ConsoleColor.DarkMagenta:
+                    break;
+                case ConsoleColor.DarkYellow:
+                    break;
+                case ConsoleColor.Gray:
+                    break;
+                case ConsoleColor.DarkGray:
+                    break;
+                case ConsoleColor.Blue:
+                    break;
+                case ConsoleColor.Green:
+                    break;
+                case ConsoleColor.Cyan:
+                    break;
+                case ConsoleColor.Red:
+                    break;
+                case ConsoleColor.Magenta:
+                    break;
+                case ConsoleColor.Yellow:
+                    break;
+                case ConsoleColor.White:
+                    break;
+            }
         }
-    }
 
-    public class Caixa<T>
+        private static ConsoleColor Teste()
+        {
+            throw new NotImplementedException();
+        }
+
+        public class Caixa<T>
     {        
         List<T> frutas = new List<T>();
 
@@ -96,4 +136,5 @@ namespace ControleDeBar.ConsoleApp
     }
 
 
+    }
 }
