@@ -2,7 +2,7 @@
 {
     internal class ProgramComExemplosGeneric2
     {
-        static void Main(string[] args)
+        static void Main2(string[] args)
         {
             Cachorro cachorroMacho = new Cachorro();
             Cachorro cachorroFemea = new Cachorro();

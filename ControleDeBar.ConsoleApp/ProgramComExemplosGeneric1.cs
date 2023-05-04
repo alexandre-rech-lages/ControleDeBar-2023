@@ -5,7 +5,7 @@ namespace ControleDeBar.ConsoleApp
 {
     internal class ProgramComExemplosGeneric1
     {
-        static void Main3(string[] args)
+        static void Main2(string[] args)
         {
             Laranja laranja = new Laranja();
             laranja.tipoLaranja = TipoLaranja.Bahia;
