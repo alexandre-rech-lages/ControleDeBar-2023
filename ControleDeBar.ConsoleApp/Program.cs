@@ -1,17 +1,13 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloConta;
-using ControleDeBar.ConsoleApp.ModuloGarcom;
-using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloPrincipal;
-using ControleDeBar.ConsoleApp.ModuloProduto;
-using System.Collections;
 
 namespace ControleDeBar.ConsoleApp
-{
+{  
     internal class Program
-    {      
-        static void Main(string[] args)
-        {            
+    {       
+        static void Main2(string[] args)
+        {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
 
             while (true)
@@ -20,10 +16,10 @@ namespace ControleDeBar.ConsoleApp
 
                 if (tela == null)
                     break;
-                
-                if (tela is TelaConta)                
-                    CadastrarContas(tela);                                    
-                else  
+
+                if (tela is TelaConta)
+                    CadastrarContas(tela);
+                else
                     ExecutarCadastros(tela);
             }
         }

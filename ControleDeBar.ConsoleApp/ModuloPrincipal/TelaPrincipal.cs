@@ -19,7 +19,7 @@ namespace ControleDeBar.ConsoleApp.ModuloPrincipal
             RepositorioMesa repositorioMesa = new RepositorioMesa(new ArrayList());
             RepositorioProduto repoositorioProduto = new RepositorioProduto(new ArrayList());
             RepositorioGarcom repositorioGarcom = new RepositorioGarcom(new ArrayList());            
-            RepositorioConta repositorioConta = new RepositorioConta(new ArrayList());
+            RepositorioConta repositorioConta = new RepositorioConta(new ArrayList());            
 
             PopularAplicacao(repositorioMesa, repoositorioProduto, repositorioGarcom);
 
