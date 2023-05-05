@@ -1,6 +1,8 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloConta;
+using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloPrincipal;
+using ControleDeBar.ConsoleApp.ModuloProduto;
 
 namespace ControleDeBar.ConsoleApp
 {  
@@ -12,19 +14,22 @@ namespace ControleDeBar.ConsoleApp
 
             while (true)
             {
-                TelaBase tela = telaPrincipal.SelecionarTela();
+                ITelaCadastravel tela = telaPrincipal.SelecionarTela();
 
                 if (tela == null)
                     break;
 
                 if (tela is TelaConta)
-                    CadastrarContas(tela);
+                {                       
+                    TelaConta telaConta = (TelaConta) tela; // TelaConta telaConta = tela as TelaConta;
+                    CadastrarContas(telaConta);
+                }
                 else
                     ExecutarCadastros(tela);
             }
         }
 
-        private static void ExecutarCadastros(TelaBase tela)
+        private static void ExecutarCadastros(ITelaCadastravel tela)
         {
             string subMenu = tela.ApresentarMenu();
 
@@ -47,11 +52,9 @@ namespace ControleDeBar.ConsoleApp
             }
         }
 
-        private static void CadastrarContas(TelaBase tela)
+        private static void CadastrarContas(TelaConta telaConta)
         {
-            string subMenu = tela.ApresentarMenu();
-
-            TelaConta telaConta = (TelaConta)tela;
+            string subMenu = telaConta.ApresentarMenu();
 
             if (subMenu == "1")
             {

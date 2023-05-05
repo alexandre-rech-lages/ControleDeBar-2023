@@ -2,12 +2,11 @@
 using ControleDeBar.ConsoleApp.ModuloGarcom;
 using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloProduto;
-using Microsoft.Win32;
 using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloConta
 {
-    public class TelaConta : TelaBase
+    public class TelaConta : TelaBase<RepositorioConta, Conta>
     {
         private RepositorioConta repositorioConta;
 
@@ -52,7 +51,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Inserindo um novo registro...");
 
-            Conta conta = (Conta)ObterRegistro();
+            Conta conta = ObterRegistro();
 
             if (TemErrosDeValidacao(conta))
             {
@@ -65,18 +64,18 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             AdicionarPedidos(conta);
 
-            MostrarMensagem("Registro inserido com sucesso!", ConsoleColor.Green);
+            MostrarMensagemSucesso("Registro inserido com sucesso!");
         }
 
         public bool VisualizarContasAbertas()
         {
             MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Visualizando contas em aberto...");
 
-            ArrayList contasEmAberto = repositorioConta.SelecionarContasEmAberto();
+            List<Conta> contasEmAberto = repositorioConta.SelecionarContasEmAberto();
 
             if (contasEmAberto.Count == 0)
             {
-                MostrarMensagem("Nenhuma conta em aberto", ConsoleColor.DarkYellow);
+                MostrarMensagemAtencao("Nenhuma conta em aberto");
                 return false;
             }
 
@@ -94,7 +93,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             if (temContasEmAberto == false)
                 return;
 
-            Conta contaSelecionada = (Conta)EncontrarRegistro("Digite o id da Conta: ");
+            Conta contaSelecionada = EncontrarRegistro("Digite o id da Conta: ");
 
             Console.WriteLine("Digite 1 para adicionar pedidos");
             Console.WriteLine("Digite 2 para remover pedidos");
@@ -117,11 +116,11 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             if (temContasEmAberto == false)
                 return;
 
-            Conta contaSelecionada = (Conta)EncontrarRegistro("Digite o id da Conta: ");
+            Conta contaSelecionada = EncontrarRegistro("Digite o id da Conta: ");
 
             contaSelecionada.Fechar();
 
-            MostrarMensagem("Conta fechada com sucesso", ConsoleColor.Green);
+            MostrarMensagemSucesso("Conta fechada com sucesso");
         }
 
         public void VisualizarFaturamentoDoDia()
@@ -131,7 +130,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             Console.WriteLine( "Digite a data: " );
             DateTime data = Convert.ToDateTime(Console.ReadLine());
 
-            ArrayList contasFechadasNoDia = repositorioConta.SelecionarContasFechadas(data);
+            List<Conta> contasFechadasNoDia = repositorioConta.SelecionarContasFechadas(data);
 
             FaturamentoDiario faturamentoDiario = new FaturamentoDiario(contasFechadasNoDia);
 
@@ -143,12 +142,12 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             Console.WriteLine(  );
 
-            MostrarMensagem("Total faturado: " + totalFaturado, ConsoleColor.Green);
+            MostrarMensagemSucesso("Total faturado: " + totalFaturado);
         }
 
         #region métodos privados
 
-        protected override void MostrarTabela(ArrayList registros)
+        protected override void MostrarTabela(List<Conta> registros)
         {
             foreach (Conta conta in registros)
             {
@@ -163,7 +162,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             }
         }
 
-        protected override EntidadeBase ObterRegistro()
+        protected override Conta ObterRegistro()
         {
             Mesa mesaSelecionada = ObterMesa();
 
@@ -206,7 +205,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             telaProduto.VisualizarRegistros(false);
 
-            Produto produto = (Produto)telaProduto.EncontrarRegistro("Digite o id do Produto: ");
+            Produto produto = telaProduto.EncontrarRegistro("Digite o id do Produto: ");
 
             Console.WriteLine();
 
@@ -219,7 +218,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
             if (contaSelecionada.pedidos.Count == 0)
             {
-                MostrarMensagem("Nenhum pedido cadastrado para esta conta", ConsoleColor.DarkYellow);
+                MostrarMensagemAtencao("Nenhum pedido cadastrado para esta conta");
                 return;
             }
         }
@@ -228,7 +227,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             telaGarcom.VisualizarRegistros(false);
 
-            Garcom garcomSelecionado = (Garcom)telaGarcom.EncontrarRegistro("Digite o id do Garçom: ");
+            Garcom garcomSelecionado = telaGarcom.EncontrarRegistro("Digite o id do Garçom: ");
 
             Console.WriteLine();
 
@@ -239,7 +238,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             telaMesa.VisualizarRegistros(false);
 
-            Mesa mesaSelecionada = (Mesa)telaMesa.EncontrarRegistro("Digite o id da Mesa: ");
+            Mesa mesaSelecionada = telaMesa.EncontrarRegistro("Digite o id da Mesa: ");
 
             Console.WriteLine();
 

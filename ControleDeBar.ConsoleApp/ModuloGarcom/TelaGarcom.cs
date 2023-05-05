@@ -1,9 +1,8 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloGarcom
 {
-    public class TelaGarcom : TelaBase
+    public class TelaGarcom : TelaBase<RepositorioGarcom, Garcom>
     {
         public TelaGarcom(RepositorioGarcom repositorioGarcom)
         {
@@ -12,7 +11,7 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcom
             sufixo = "s";
         }
 
-        protected override void MostrarTabela(ArrayList registros)
+        protected override void MostrarTabela(List<Garcom> registros)
         {
             foreach (Garcom garcom in registros)
             {
@@ -21,7 +20,7 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcom
             }
         }
 
-        protected override EntidadeBase ObterRegistro()
+        protected override Garcom ObterRegistro()
         {
             Console.WriteLine("Digite o nome do garçom: ");
             string nomeGarcom = Console.ReadLine();

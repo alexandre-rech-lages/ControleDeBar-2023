@@ -2,34 +2,14 @@
 
 namespace ControleDeBar.ConsoleApp.Compartilhado
 {
-    public abstract class TelaBase
+    public abstract class TelaBase<TRepositorio, TEntidade> : ITelaCadastravel
+        where TRepositorio : RepositorioBase<TEntidade>
+        where TEntidade : EntidadeBase<TEntidade>
     {
         public string nomeEntidade;
         public string sufixo;
 
-        protected RepositorioBase repositorioBase = null;
-
-        public void MostrarCabecalho(string titulo, string subtitulo)
-        {
-            Console.Clear();
-
-            Console.WriteLine(titulo + "\n");
-
-            Console.WriteLine(subtitulo + "\n");
-        }
-
-        public void MostrarMensagem(string mensagem, ConsoleColor cor)
-        {
-            Console.WriteLine();
-
-            Console.ForegroundColor = cor;
-
-            Console.WriteLine(mensagem);
-
-            Console.ResetColor();
-
-            Console.ReadLine();
-        }
+        protected TRepositorio repositorioBase = null;
 
         public virtual string ApresentarMenu()
         {
@@ -53,7 +33,7 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
         {
             MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Inserindo um novo registro...");
 
-            EntidadeBase registro = ObterRegistro();
+            TEntidade registro = ObterRegistro();
 
             if (TemErrosDeValidacao(registro))
             {
@@ -64,19 +44,19 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
 
             repositorioBase.Inserir(registro);
 
-            MostrarMensagem("Registro inserido com sucesso!", ConsoleColor.Green);
+            MostrarMensagemSucesso("Registro inserido com sucesso!");
         }
-        
+
         public virtual void VisualizarRegistros(bool mostrarCabecalho)
         {
             if (mostrarCabecalho)
                 MostrarCabecalho($"Cadastro de {nomeEntidade}{sufixo}", "Visualizando registros já cadastrados...");
 
-            ArrayList registros = repositorioBase.SelecionarTodos();
+            List<TEntidade> registros = repositorioBase.SelecionarTodos();
 
             if (registros.Count == 0)
             {
-                MostrarMensagem("Nenhum registro cadastrado", ConsoleColor.DarkYellow);
+                MostrarMensagemAtencao("Nenhum registro cadastrado");
             }
 
             MostrarTabela(registros);
@@ -90,9 +70,9 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
 
             Console.WriteLine();
 
-            EntidadeBase registro = EncontrarRegistro("Digite o id do registro: ");
+            TEntidade registro = EncontrarRegistro("Digite o id do registro: ");
 
-            EntidadeBase registroAtualizado = ObterRegistro();
+            TEntidade registroAtualizado = ObterRegistro();
 
             if (TemErrosDeValidacao(registroAtualizado))
             {
@@ -103,7 +83,7 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
 
             repositorioBase.Editar(registro, registroAtualizado);
 
-            MostrarMensagem("Registro editado com sucesso!", ConsoleColor.Green);
+            MostrarMensagemSucesso("Registro editado com sucesso!");
         }
 
         public virtual void ExcluirRegistro()
@@ -114,17 +94,17 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
 
             Console.WriteLine();
 
-            EntidadeBase registro = EncontrarRegistro("Digite o id do registro: ");
+            TEntidade registro = EncontrarRegistro("Digite o id do registro: ");
 
             repositorioBase.Excluir(registro);
 
-            MostrarMensagem("Registro excluído com sucesso!", ConsoleColor.Green);
-        }      
+            MostrarMensagemSucesso("Registro excluído com sucesso!");
+        }
 
-        public virtual EntidadeBase EncontrarRegistro(string textoCampo)
-        {            
+        public virtual TEntidade EncontrarRegistro(string textoCampo)
+        {
             bool idInvalido;
-            EntidadeBase registroSelecionado = null;
+            TEntidade registroSelecionado = null;
 
             do
             {
@@ -145,14 +125,15 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
                 }
 
                 if (idInvalido)
-                    MostrarMensagem("Id inválido, tente novamente", ConsoleColor.Red);
+                    MostrarMensagemErro("Id inválido, tente novamente");
 
             } while (idInvalido);
 
             return registroSelecionado;
         }
 
-        protected bool TemErrosDeValidacao(EntidadeBase registro)
+        #region metodos privados
+        protected bool TemErrosDeValidacao(TEntidade registro)
         {
             bool temErros = false;
 
@@ -176,9 +157,65 @@ namespace ControleDeBar.ConsoleApp.Compartilhado
             return temErros;
         }
 
-        protected abstract EntidadeBase ObterRegistro();
+        protected abstract TEntidade ObterRegistro();
 
-        protected abstract void MostrarTabela(ArrayList registros);
+        protected abstract void MostrarTabela(List<TEntidade> registros);
 
+        protected void MostrarCabecalho(string titulo, string subtitulo)
+        {
+            Console.Clear();
+
+            Console.WriteLine(titulo + "\n");
+
+            Console.WriteLine(subtitulo + "\n");
+        }
+
+        private void MostrarMensagem(string mensagem, TipoMensagem tipo)
+        {
+            Console.WriteLine();
+
+            ConsoleColor cor;
+
+            switch (tipo)
+            {
+                case TipoMensagem.Sucesso: cor = ConsoleColor.Green; break;
+                case TipoMensagem.Erro: cor = ConsoleColor.Red; break;
+                case TipoMensagem.Atencao: cor = ConsoleColor.DarkYellow; break;
+
+                default: cor = ConsoleColor.White;
+                    break;
+            }
+
+            Console.ForegroundColor = cor;
+
+            Console.WriteLine(mensagem);
+
+            Console.ResetColor();
+
+            Console.ReadLine();
+        }
+
+        protected void MostrarMensagemSucesso(string mensagem)
+        {
+            MostrarMensagem(mensagem, TipoMensagem.Sucesso);
+        }
+
+        protected void MostrarMensagemAtencao(string mensagem)
+        {
+            MostrarMensagem(mensagem, TipoMensagem.Atencao);
+        }
+
+        protected void MostrarMensagemErro(string mensagem)
+        {
+            MostrarMensagem(mensagem, TipoMensagem.Erro);
+        }
+
+
+        #endregion
+    }
+
+    public enum TipoMensagem
+    {
+        Sucesso, Erro, Atencao
     }
 }

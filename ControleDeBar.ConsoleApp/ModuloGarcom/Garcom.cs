@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloGarcom
 {
-    public class Garcom : EntidadeBase
+    public class Garcom : EntidadeBase<Garcom>
     {
         public string nome { get; set; }
 
@@ -12,10 +12,8 @@ namespace ControleDeBar.ConsoleApp.ModuloGarcom
             this.nome = nomeGarcom;
         }
 
-        public override void AtualizarInformacoes(EntidadeBase registroAtualizado)
+        public override void AtualizarInformacoes(Garcom garcomAtualizado)
         {
-            Garcom garcomAtualizado = (Garcom)registroAtualizado;
-
             this.nome = garcomAtualizado.nome;
         }
 

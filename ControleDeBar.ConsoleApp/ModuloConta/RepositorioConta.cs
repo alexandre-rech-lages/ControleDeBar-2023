@@ -2,17 +2,17 @@
 using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloConta
-{
-    public class RepositorioConta : RepositorioBase
+{    
+    public class RepositorioConta : RepositorioBase<Conta>
     {
-        public RepositorioConta(ArrayList listaContas)
+        public RepositorioConta(List<Conta> listaContas)
         {
             listaRegistros = listaContas;
         }
 
-        public ArrayList SelecionarContasEmAberto()
+        public List<Conta> SelecionarContasEmAberto()
         {
-            ArrayList contasEmAberto = new ArrayList();
+            List<Conta> contasEmAberto = new List<Conta>();
 
             foreach (Conta conta in listaRegistros)
             {
@@ -23,9 +23,9 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
             return contasEmAberto;
         }
 
-        public ArrayList SelecionarContasFechadas(DateTime data)
+        public List<Conta> SelecionarContasFechadas(DateTime data)
         {
-            ArrayList contasEmAberto = new ArrayList();
+            List<Conta> contasEmAberto = new List<Conta>();
 
             foreach (Conta conta in listaRegistros)
             {

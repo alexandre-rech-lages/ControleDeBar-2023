@@ -1,9 +1,8 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloProduto
 {
-    public class TelaProduto : TelaBase
+    public class TelaProduto : TelaBase<RepositorioProduto, Produto>
     {
         public TelaProduto(RepositorioProduto repositorioProduto)
         {
@@ -12,7 +11,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
             sufixo = "s";
         }
 
-        protected override void MostrarTabela(ArrayList registros)
+        protected override void MostrarTabela(List<Produto> registros)
         {
             foreach (Produto produto in registros)
             {
@@ -21,7 +20,7 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
             }
         }
 
-        protected override EntidadeBase ObterRegistro()
+        protected override Produto ObterRegistro()
         {
             Console.WriteLine("Digite o nome do produto");
             string nomeProduto = Console.ReadLine();

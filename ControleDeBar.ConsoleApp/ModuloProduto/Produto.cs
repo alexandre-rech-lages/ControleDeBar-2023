@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace ControleDeBar.ConsoleApp.ModuloProduto
 {
-    public class Produto : EntidadeBase
+    public class Produto : EntidadeBase<Produto>
     {
         public string nome;
         public decimal preco;
@@ -14,10 +14,8 @@ namespace ControleDeBar.ConsoleApp.ModuloProduto
             this.preco = preco; 
         }
 
-        public override void AtualizarInformacoes(EntidadeBase registroAtualizado)
+        public override void AtualizarInformacoes(Produto produtoAtualizado)
         {
-            Produto produtoAtualizado = (Produto)registroAtualizado;
-
             this.nome = produtoAtualizado.nome;
             this.preco = produtoAtualizado.preco;
         }
