@@ -41,28 +41,12 @@
 
         public virtual TEntidade SelecionarPorId(int id)
         {
-            TEntidade registroSelecionado = null;
-
-            foreach (TEntidade registro in listaRegistros)
-            {
-                if (registro.id == id)
-                {
-                    registroSelecionado = registro;
-                    break;
-                }
-            }
-
-            return registroSelecionado;
+            return listaRegistros.Find(registro => registro.id == id);
         }
 
         public virtual List<TEntidade> SelecionarTodos()
         {
             return listaRegistros;
-        }
-
-        public bool TemRegistros()
-        {
-            return listaRegistros.Count > 0;
-        }
+        }       
     }
 }

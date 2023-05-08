@@ -9,7 +9,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
     public class Conta : EntidadeBase<Conta>
     {
         public Mesa mesa;
-        public ArrayList pedidos;
+        public List<Pedido> pedidos;
         public Garcom garcom;
         public bool estaAberta;
 
@@ -19,7 +19,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
         {
             mesa = m;
             garcom = g;            
-            pedidos = new ArrayList();
+            pedidos = new List<Pedido>();
             data = dataAbertura;
 
             Abrir();
@@ -34,16 +34,7 @@ namespace ControleDeBar.ConsoleApp.ModuloConta
 
         public decimal CalcularValorTotal()
         {
-            decimal total = 0;
-
-            foreach (Pedido pedido in pedidos)
-            {
-                decimal totalPedido = pedido.CalcularTotalParcial();
-
-                total += totalPedido;
-            }
-
-            return total;   
+            return pedidos.Sum(p => p.CalcularTotalParcial());            
         }
 
         public override void AtualizarInformacoes(Conta contaAtualizada)
