@@ -1,6 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-
-namespace ControleDeBar.ConsoleApp.ModuloFuncionario
+﻿namespace ControleDeBar.ConsoleApp.ModuloFuncionario
 {
     internal class TelaFuncionario : TelaBase<RepositorioFuncionario, Funcionario>
     {

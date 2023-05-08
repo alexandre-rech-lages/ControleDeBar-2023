@@ -1,6 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-
-namespace ControleDeBar.ConsoleApp.ModuloMesa
+﻿namespace ControleDeBar.ConsoleApp.ModuloMesa
 {
     public class TelaMesa : TelaBase<RepositorioMesa, Mesa>
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace ControleDeBar.ConsoleApp.Compartilhado
+﻿namespace ControleDeBar.ConsoleApp.Compartilhado
 {
     public abstract class EntidadeBase<TEntidade>
     {

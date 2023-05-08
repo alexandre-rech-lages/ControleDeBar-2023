@@ -1,6 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-
-namespace ControleDeBar.ConsoleApp.ModuloProduto
+﻿namespace ControleDeBar.ConsoleApp.ModuloProduto
 {
     public class TelaProduto : TelaBase<RepositorioProduto, Produto>
     {

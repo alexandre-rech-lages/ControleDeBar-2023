@@ -1,7 +1,4 @@
-﻿using ControleDeBar.ConsoleApp.Compartilhado;
-using System.Collections;
-
-namespace ControleDeBar.ConsoleApp.ModuloFuncionario
+﻿namespace ControleDeBar.ConsoleApp.ModuloFuncionario
 {
     internal class Funcionario : EntidadeBase<Funcionario>
     {

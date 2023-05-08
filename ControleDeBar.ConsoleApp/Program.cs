@@ -1,15 +1,14 @@
 ﻿using ControleDeBar.ConsoleApp.Compartilhado;
 using ControleDeBar.ConsoleApp.ModuloConta;
-using ControleDeBar.ConsoleApp.ModuloMesa;
 using ControleDeBar.ConsoleApp.ModuloPrincipal;
-using ControleDeBar.ConsoleApp.ModuloProduto;
 
 namespace ControleDeBar.ConsoleApp
 {  
     internal class Program
     {       
+        //Global Usings -- Implicit Using
         static void Main2(string[] args)
-        {
+        {            
             TelaPrincipal telaPrincipal = new TelaPrincipal();
 
             while (true)
