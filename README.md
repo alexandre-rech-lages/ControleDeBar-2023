@@ -1,1 +1,0 @@
-# ControleDeBar-2023
