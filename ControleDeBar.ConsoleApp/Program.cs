@@ -6,10 +6,16 @@ namespace ControleDeBar.ConsoleApp
 {  
     internal class Program
     {       
-        //Global Usings -- Implicit Using
+        //Métodos de Extensão
         static void Main2(string[] args)
         {            
             TelaPrincipal telaPrincipal = new TelaPrincipal();
+
+
+            if (DateTime.Now.CompareWithoutMinutes(DateTime.Now) > 0)
+            {
+
+            }
 
             while (true)
             {
